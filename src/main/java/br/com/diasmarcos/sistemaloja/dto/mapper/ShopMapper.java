@@ -5,7 +5,6 @@ import br.com.diasmarcos.sistemaloja.dto.request.ProdutosDTO;
 import br.com.diasmarcos.sistemaloja.entities.Estoques;
 import br.com.diasmarcos.sistemaloja.entities.Produtos;
 import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
