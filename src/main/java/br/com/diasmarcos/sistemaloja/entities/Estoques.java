@@ -17,7 +17,8 @@ public class Estoques {
     @GeneratedValue
     private Long id;
 
-    @OneToOne(targetEntity = Ingredientes.class, fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @OneToOne(targetEntity = Ingredientes.class, fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL, orphanRemoval = true)
     private Ingredientes ingredients;
 
     @Column(nullable = false)

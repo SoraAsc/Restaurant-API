@@ -2,6 +2,7 @@ package br.com.diasmarcos.sistemaloja.dto.mapper;
 
 import br.com.diasmarcos.sistemaloja.dto.request.EstoquesDTO;
 import br.com.diasmarcos.sistemaloja.dto.request.ProdutosDTO;
+import br.com.diasmarcos.sistemaloja.dto.response.RelatorioProdutoDTO;
 import br.com.diasmarcos.sistemaloja.entities.Estoques;
 import br.com.diasmarcos.sistemaloja.entities.Produtos;
 import org.mapstruct.Mapper;
@@ -20,5 +21,7 @@ public interface ShopMapper {
     ProdutosDTO productToDTO(Produtos product);
 
     Produtos productDTOTOEntity(ProdutosDTO productDTO);
+
+    RelatorioProdutoDTO productToProductReportDTO(Produtos product);
 
 }

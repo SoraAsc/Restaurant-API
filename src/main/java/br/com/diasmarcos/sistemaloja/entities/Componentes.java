@@ -1,6 +1,8 @@
 package br.com.diasmarcos.sistemaloja.entities;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -18,6 +20,7 @@ public class Componentes {
     private Long id;
 
     @ManyToOne(targetEntity = Ingredientes.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ingredient_id", referencedColumnName = "id",nullable = false)
     private Ingredientes ingredient; //Ingrediente
 
     @Column(nullable = false)

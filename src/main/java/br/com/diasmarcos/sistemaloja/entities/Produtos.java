@@ -20,15 +20,16 @@ public class Produtos {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name; //Nome Do Produto
 
     @Column
     private String image; //Imagem
 
     @Column(nullable = false)
-    private BigDecimal price; //Preço
+    private BigDecimal price; //Preço por unidade, Ex: 1kg = R$ 5 ou Ex: 1g = R$ 5
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, targetEntity = Componentes.class)
+    @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true,
+            cascade = CascadeType.ALL, targetEntity = Componentes.class)
     private List<Componentes> components; //Lista com os ingredientes e suas repectitivas quantidades.
 }
