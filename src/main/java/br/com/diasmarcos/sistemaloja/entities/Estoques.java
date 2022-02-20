@@ -15,13 +15,13 @@ public class Estoques {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private Long id; //ID do Estoque
 
     @OneToOne(targetEntity = Ingredientes.class, fetch = FetchType.LAZY,
             cascade = CascadeType.ALL, orphanRemoval = true)
-    private Ingredientes ingredients;
+    private Ingredientes ingredients; //Ingrediente
 
     @Column(nullable = false)
-    private BigDecimal quantity;
+    private BigDecimal quantity; //Quantidade de ingredientes
 
 }

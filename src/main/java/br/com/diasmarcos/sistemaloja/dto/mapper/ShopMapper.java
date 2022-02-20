@@ -14,14 +14,19 @@ public interface ShopMapper {
 
     ShopMapper INSTANCE = Mappers.getMapper(ShopMapper.class);
 
+    //Converte a Entidade Estoques na classe EstoquesDTO
     EstoquesDTO stockToDTO(Estoques stock);
 
+    //Converte a classe EstoquesDTO na Entidade Estoques
     Estoques stockDTOToEntity(EstoquesDTO stockDTO);
 
+    //Converte a Entidade Produtos na classe ProdutosDTO
     ProdutosDTO productToDTO(Produtos product);
 
+    //Converte a classe ProdutosDTO na Entidade Produtos
     Produtos productDTOTOEntity(ProdutosDTO productDTO);
 
+    //Converte a Entidade Produtos na classe RelatorioProdutoDTO
     RelatorioProdutoDTO productToProductReportDTO(Produtos product);
 
 }

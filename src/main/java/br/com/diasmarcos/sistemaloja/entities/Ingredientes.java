@@ -16,7 +16,7 @@ public class Ingredientes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; //ID do Ingrediente
 
     @Column(unique = true, nullable = false)
     private String name; //Nome do Ingrediente

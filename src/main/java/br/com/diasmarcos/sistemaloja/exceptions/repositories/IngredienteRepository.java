@@ -1,4 +1,4 @@
-package br.com.diasmarcos.sistemaloja.repositories;
+package br.com.diasmarcos.sistemaloja.exceptions.repositories;
 
 import br.com.diasmarcos.sistemaloja.entities.Ingredientes;
 import org.springframework.data.jpa.repository.JpaRepository;

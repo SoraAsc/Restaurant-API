@@ -11,24 +11,24 @@ import br.com.diasmarcos.sistemaloja.exceptions.ProdNotFoundException;
 import br.com.diasmarcos.sistemaloja.exceptions.ShopDupException;
 import br.com.diasmarcos.sistemaloja.exceptions.StockNotFoundException;
 import br.com.diasmarcos.sistemaloja.services.ShopService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/shop")
+@AllArgsConstructor(onConstructor = @__(@Autowired))
 public class ShopController {
 
-    @Autowired
     private ShopService shopService;
 
     // --------------------------------- Estoque ---------------------------------
 
-    //Cria um novo estoque - Create
+    //Cria um estoque — Create
     @PostMapping("/stock/create")
     @ResponseStatus(code = HttpStatus.CREATED)
     public MensagemBasicaDTO createStock(@RequestBody @Valid EstoquesDTO stockDTO){
@@ -41,7 +41,7 @@ public class ShopController {
         return shopService.listAllIngredientInStock();
     }
 
-    //Mostra todas as informações de um determinado estoque - Get By ID
+    //Mostra todas as informações de um determinado estoque — Get By ID
     @GetMapping("/stock/inspect/{id}")
     public EstoquesDTO getStockById(@PathVariable Long id) throws StockNotFoundException{
         return shopService.getStockById(id);
@@ -54,7 +54,7 @@ public class ShopController {
         return shopService.updateStockById(id, stockDTO);
     }
 
-    //Deleta um determinado estoque e os produtos que utilizam os seus ingredientes. - Delete By ID
+    //Deleta um determinado estoque e os produtos que utilizam os seus ingredientes — Delete By ID
     @DeleteMapping("/stock/inspect/{id}")
     public MensagemBasicaDTO deleteStock(@PathVariable Long id) throws StockNotFoundException {
         return shopService.deleteStock(id);
@@ -62,7 +62,7 @@ public class ShopController {
 
     // --------------------------------- Produto ---------------------------------
 
-    //Cria um novo produto - Create
+    //Cria um produto — Create
     @PostMapping("/product/create")
     @ResponseStatus(code = HttpStatus.CREATED)
     public MensagemBasicaDTO createProduct(@RequestBody @Valid ProdutosDTO productDTO)
@@ -70,25 +70,25 @@ public class ShopController {
         return shopService.createProduct(productDTO);
     }
 
-    //Lista um relatório de todos os produtos. - Get All
+    //Lista um relatório de todos os produtos — Get All
     @GetMapping("/product")
     public List<RelatorioProdutoDTO> productReport(){
         return shopService.productReport();
     }
 
-    //Mostra todas as informações de um determinado produto - Get By ID
+    //Mostra todas as informações de um determinado produto — Get By ID
     @GetMapping("/product/inspect/{id}")
-    public ProdutosDTO getProductById(@PathVariable Long id) throws ProdNotFoundException{
+    public RelatorioProdutoDTO getProductById(@PathVariable Long id) throws ProdNotFoundException{
         return shopService.getProductById(id);
     }
 
-    //Mostra se é possível vender o produto atual. - Get By ID
+    //Mostra se é possível vender o produto atual — Get By ID
     @GetMapping("/product/check/{id}")
     public ControleVendaDTO verifyIfCanBeSold(@PathVariable Long id) throws ProdNotFoundException {
         return shopService.verifyIfCanBeSold(id);
     }
 
-    //Atualiza completamente o produto especificado - Update By ID
+    //Atualiza completamente o produto especificado — Update By ID
     @PutMapping("/product/inspect/{id}")
     public MensagemBasicaDTO updateProductById(
             @PathVariable Long id, @RequestBody @Valid ProdutosDTO productDTO)
@@ -96,7 +96,7 @@ public class ShopController {
         return shopService.updateProductById(id,productDTO);
     }
 
-    //Deleta um determinado produto e seus componentes. - Delete By ID
+    //Deleta um determinado produto e seus componentes — Delete By ID
     @DeleteMapping("/product/inspect/{id}")
     public MensagemBasicaDTO deleteProduct(@PathVariable Long id) throws ProdNotFoundException{
         return shopService.deleteProduct(id);

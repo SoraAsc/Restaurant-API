@@ -17,7 +17,7 @@ public class Componentes {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; //Id do Componente
 
     @ManyToOne(targetEntity = Ingredientes.class, fetch = FetchType.LAZY)
     @JoinColumn(name = "ingredient_id", referencedColumnName = "id",nullable = false)
