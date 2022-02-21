@@ -41,7 +41,9 @@ public class ProdutoService {
      * @return Um Modelo padrão de mensagem.
      * @throws IngredientNotFoundException Se o Ingrediente com o devido ID não existir
      */
-    public MensagemBasicaDTO createProduct(ProdutosDTO productDTO) throws IngredientNotFoundException {
+    public MensagemBasicaDTO createProduct(ProdutosDTO productDTO) throws
+            IngredientNotFoundException, ShopDupException, ProdNotFoundException {
+        verifyIfProductNameIsDup(productDTO.getName(), null);
         Produtos product = shopMapper.productDTOTOEntity(productDTO);
         List<Componentes> componentList = new ArrayList<>();
         getProductComponents(productDTO, componentList);
@@ -175,10 +177,11 @@ public class ProdutoService {
      */
     private void verifyIfProductNameIsDup(String name, Long id)
             throws ProdNotFoundException, ShopDupException {
-        Produtos productToChange = verifyIfProductExist(id);
+        Produtos productToChange = null;
+        if(id!=null) productToChange = verifyIfProductExist(id);
         Produtos dupProduct = prodRepository.findByName(name);
         if(dupProduct!=null &&
-                ( !dupProduct.getId().equals(productToChange.getId()) ) )
+                ( productToChange == null || !dupProduct.getId().equals(productToChange.getId()) ) )
             throw new ShopDupException("Já existe um Produto com o nome: "+name);
     }
 

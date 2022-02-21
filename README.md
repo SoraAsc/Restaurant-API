@@ -102,7 +102,7 @@ http://localhost:8080/api/v1/shop/product/check/{id}
 
 ```
 {
-    "name": "Arroz",
+    "name": "Arroz e Feijão",
     "price": 40,
     "components": [
         {
@@ -143,7 +143,7 @@ http://localhost:8080/api/v1/shop/stock/inspect/{id}
 ```
 {
     "ingredients": {
-        "name": "Arroz2",
+        "name": "Arroz",
         "unit": "Kg",
         "price": 10.52
     },

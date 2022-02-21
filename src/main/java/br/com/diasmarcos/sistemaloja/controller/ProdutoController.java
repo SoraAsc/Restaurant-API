@@ -27,7 +27,7 @@ public class ProdutoController {
     @PostMapping("/create")
     @ResponseStatus(code = HttpStatus.CREATED)
     public MensagemBasicaDTO createProduct(@RequestBody @Valid ProdutosDTO productDTO)
-            throws IngredientNotFoundException {
+            throws IngredientNotFoundException, ShopDupException, ProdNotFoundException {
         return produtoService.createProduct(productDTO);
     }
 

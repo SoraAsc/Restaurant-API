@@ -25,7 +25,7 @@ public class EstoqueController {
     //Cria um estoque — Create
     @PostMapping("/create")
     @ResponseStatus(code = HttpStatus.CREATED)
-    public MensagemBasicaDTO createStock(@RequestBody @Valid EstoquesDTO stockDTO){
+    public MensagemBasicaDTO createStock(@RequestBody @Valid EstoquesDTO stockDTO) throws ShopDupException, StockNotFoundException {
         return estoqueService.createStock(stockDTO);
     }
 

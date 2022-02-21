@@ -34,7 +34,8 @@ public class EstoqueService {
      * @param stockDTO O DTO referente a Entidade Estoques
      * @return Um Modelo padrão de mensagem.
      */
-    public MensagemBasicaDTO createStock(EstoquesDTO stockDTO) {
+    public MensagemBasicaDTO createStock(EstoquesDTO stockDTO) throws ShopDupException, StockNotFoundException {
+        verifyIfIngredientNameIsDup(stockDTO.getIngredients().getName(),null);
         estoqueRepository.save(shopMapper.stockDTOToEntity(stockDTO));
         return createBasicMessage(String.format("O estoque %s foi criado com sucesso!",
                 stockDTO.getIngredients().getName()));
@@ -93,9 +94,8 @@ public class EstoqueService {
         estoqueRepository.delete(stock);
 
         String message = (prodNames.length()>0 ?
-                "Os seguintes produtos foram excluidos por falta de suplimento no estoque: ["+prodNames+"]" : "")
-                + String.format(System.lineSeparator()
-                        +"O Estoque com o seguinte ingrediente “%s” foi deletado com sucesso!",
+                "Os seguintes produtos foram excluidos por falta de suplimento no estoque: ["+prodNames+"]." : "")
+                + String.format(" O Estoque com o seguinte ingrediente “%s” foi deletado com sucesso!",
                 stock.getIngredients().getName());
 
         return createBasicMessage(message);
@@ -123,10 +123,11 @@ public class EstoqueService {
      */
     private Estoques verifyIfIngredientNameIsDup(String name, Long id)
             throws StockNotFoundException, ShopDupException {
-        Estoques stockToChange = verifyIfStockExist(id);
+        Estoques stockToChange = null;
+        if(id!=null) stockToChange = verifyIfStockExist(id);
         Ingredientes dupIngredient = ingredienteRepository.findByName(name);
         if(dupIngredient!=null
-                && ( !dupIngredient.getId().equals(stockToChange.getIngredients().getId()) ) )
+                && ( stockToChange==null || !dupIngredient.getId().equals(stockToChange.getIngredients().getId()) ) )
             throw new ShopDupException("Já existe um Ingrediente com o nome: "+name);
         return stockToChange;
     }
